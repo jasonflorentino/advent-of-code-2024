@@ -57,9 +57,9 @@ const X_MOVE ={
 }
 
 /**
- * @returns true when there is a MAS around [x, y]
+ * @returns true when there is a MAS around [x, y] in direction x_moveK
  */
-function checkX_Mas(x, y, data, x_moveK) {
+function checkX_MasDir(x, y, data, x_moveK) {
     let hasM = false;
     let hasS = false;
     for (const pos of X_MOVE[x_moveK]) {
@@ -73,9 +73,9 @@ function checkX_Mas(x, y, data, x_moveK) {
 /**
  * @returns true when there is an X-MAS at [x, y]
  */
-function checkAllX_Mas(x, y, data) {
+function checkForX_Mas(x, y, data) {
     const results = Object.keys(X_MOVE).map(
-        (x_moveK) => checkX_Mas(x, y, data, x_moveK)
+        (x_moveK) => checkX_MasDir(x, y, data, x_moveK)
     )
     return results.every(Boolean);
 }
@@ -103,7 +103,7 @@ function main(name) {
     for (let y = 0; y < data.length; y++) {
         for (let x = 0; x < data[y].length; x++) {
             if ('A' === data[y][x]) {
-                twoTotal += checkAllX_Mas(x, y, data)
+                twoTotal += checkForX_Mas(x, y, data)
             }
         }
     }
