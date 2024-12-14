@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const lines = fs.readFileSync(name).toString().trim().split('\n'); 
@@ -47,6 +47,7 @@ function main() {
     
     // one
     // Analyze the unusual data from the engineers. How many reports are safe?
+    // 549
     const goodReports = [];
     const badReports = [];
     for (const report of reports) {
@@ -61,6 +62,7 @@ function main() {
     // two
     // Update your analysis by handling situations where the Problem Dampener can remove a single
     // level from unsafe reports. How many reports are now safe?
+    // 589
     let almostGood = 0;
     for (const report of badReports) {
         if (isSafe2(report)) {

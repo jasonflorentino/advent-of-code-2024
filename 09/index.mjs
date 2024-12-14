@@ -1,8 +1,8 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const data = fs.readFileSync(name).toString().trim().split('').map(Number); 
-    return data
+    return data;
 }
 
 function buildDiskmap(data) {
@@ -63,10 +63,6 @@ function computeObjChecksum(objDiskmap) {
     }, 0);
 }
 
-function toDiskmapStr(diskmap) {
-    return diskmap.map((x) => x === undefined ? '-' : x).join('')
-}
-
 function compactDiskmapContiguous(objDiskmap) {
     let diskmap = objDiskmap.slice();
     let fIdx = diskmap.length - 1;
@@ -90,14 +86,18 @@ function compactDiskmapContiguous(objDiskmap) {
 }
 
 function main(name) {
-    const data = loadInput(name)
+    const data = loadInput(name);
 
+    // Compact the amphipod's hard drive using the process he requested. What is the resulting 
+    // filesystem checksum?
     const diskmap = buildDiskmap(data);
     const compact = compactDiskmap(diskmap);
     console.log(computeChecksum(compact));
     // 1928
     // 6349606724455
     
+    // Start over, now compacting the amphipod's hard drive using this new method instead. What is 
+    // the resulting filesystem checksum?
     const diskmap2  = buildObjDiskmap(data);
     const compact2 = compactDiskmapContiguous(diskmap2);
     console.log(computeObjChecksum(compact2));

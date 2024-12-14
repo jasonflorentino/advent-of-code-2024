@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const input = fs.readFileSync(name).toString().trim();
@@ -21,19 +21,21 @@ function main(name) {
     // one
     // Scan the corrupted memory for uncorrupted mul instructions. What do you get if you add up all
     // of the results of the multiplications?
+    // 159892596
     const muls = parseMuls(data);
     const total = muls.reduce((total, match) => {
         const [_, a, b] = match;
         return total + Number(a) * Number(b);
-    }, 0)
+    }, 0);
     console.log(total);
 
     // two
     // Handle the new instructions; what do you get if you add up all of the results of just the
     // enabled multiplications?
+    // 92626942
     const dos = parseDos(data);
     let mulEnabled = true;
-    let enabledSum = 0
+    let enabledSum = 0;
     for (let i = 0; i < data.length; i++) {
         const doo = dos.find((doo) => doo.index === i);
         if (doo) {
@@ -41,12 +43,12 @@ function main(name) {
             mulEnabled = !doo[1];
         }
 
-        const mul = muls.find((mul) => mul.index === i)
+        const mul = muls.find((mul) => mul.index === i);
         if (mul && mulEnabled) {
             enabledSum += Number(mul[1]) * Number(mul[2]);
         }  
     }
-    console.log(enabledSum)
+    console.log(enabledSum);
 }
 
 main(process.argv[2]);

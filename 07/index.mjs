@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const eqs = fs.readFileSync(name).toString().trim().split('\n'); 
@@ -39,9 +39,9 @@ function evaluate(operands, permutation, operators) {
 }
 
 function main(name) {
-    const data = loadInput(name)
+    const data = loadInput(name);
     
-    const one = (data, operators) => {
+    const solve = (data, operators) => {
         const opKeys = Object.keys(operators);
         const valid = data.filter(([res, operands]) => {
             const optCount = opKeys.length ** (operands.length - 1);
@@ -58,11 +58,14 @@ function main(name) {
         })
         console.log(valid.reduce((total, [res]) => total + res, 0));
     }
-    one(data, Operators);
+    // Determine which equations could possibly be true. What is their total calibration result?
     // 7710205485870
+    solve(data, Operators);
     
-    one(data, { ...Operators, concat: (x, y) => Number(String(x) +  String(y)) });
+    // Using your new knowledge of elephant hiding spots, determine which equations could possibly 
+    // be true. What is their total calibration result?
     // 20928985450275
+    solve(data, { ...Operators, concat: (x, y) => Number(String(x) +  String(y)) });
 }
 
 

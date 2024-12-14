@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const parts = fs.readFileSync(name).toString().trim().split(' '); 
@@ -59,9 +59,11 @@ function toStoneRecord(stones) {
 async function main(name) {
     const data = loadInput(name)
     
+    // How many stones will you have after blinking 25 times?
     const nums = generate(data, 25); // 191690
     console.log(nums.length);
     
+    // How many stones would you have after blinking a total of 75 times?
     let generation = 0;
     let stones = toStoneRecord(data); 
     while (generation++ < 75) {

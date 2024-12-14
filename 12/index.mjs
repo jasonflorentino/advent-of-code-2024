@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const lines = fs.readFileSync(name).toString().trim().split('\n'); 
@@ -177,6 +177,7 @@ class Gardens {
     }
 }
 
+// What is the new total price of fencing all regions on your map? 
 function main(name) {
     const data = loadInput(name);
     const field = new Field(data);

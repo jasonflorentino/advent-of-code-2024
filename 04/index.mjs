@@ -1,9 +1,9 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const lines = fs.readFileSync(name).toString().trim().split('\n'); 
     const data = lines.map((l) => l.split(''));
-    return data 
+    return data;
 }
 
 const MOVE = {
@@ -44,7 +44,7 @@ function checkDir(x, y, data, moveK) {
  */
 function checkAllDir(x, y, data) {
     const results = Object.keys(MOVE).map(
-        (moveK) => checkDir(x, y, data, moveK)
+        (moveK) => checkDir(x, y, data, moveK),
     )
     return results;
 }
@@ -53,7 +53,7 @@ function checkAllDir(x, y, data) {
 
 const X_MOVE ={ 
     forw: [MOVE.ne, MOVE.sw],
-    back: [MOVE.nw, MOVE.se]
+    back: [MOVE.nw, MOVE.se],
 }
 
 /**
@@ -75,7 +75,7 @@ function checkX_MasDir(x, y, data, x_moveK) {
  */
 function checkForX_Mas(x, y, data) {
     const results = Object.keys(X_MOVE).map(
-        (x_moveK) => checkX_MasDir(x, y, data, x_moveK)
+        (x_moveK) => checkX_MasDir(x, y, data, x_moveK),
     )
     return results.every(Boolean);
 }
@@ -83,27 +83,27 @@ function checkForX_Mas(x, y, data) {
 function main(name) {
     const data = loadInput(name)
 
-    // one
     // Take a look at the little Elf's word search. How many times does XMAS appear?
+    // 2583
     let oneTotal = 0;
     for (let y = 0; y < data.length; y++) {
         for (let x = 0; x < data[y].length; x++) {
             if ('X' === data[y][x]) {
-                const result = checkAllDir(x, y, data)
+                const result = checkAllDir(x, y, data);
                 oneTotal += result.filter(Boolean).length;
             }
         }
     }
     console.log(oneTotal);
     
-    // two
     // Flip the word search from the instructions back over to the word search side and try again.
     // How many times does an X-MAS appear?
+    // 1978
     let twoTotal = 0;
     for (let y = 0; y < data.length; y++) {
         for (let x = 0; x < data[y].length; x++) {
             if ('A' === data[y][x]) {
-                twoTotal += checkForX_Mas(x, y, data)
+                twoTotal += checkForX_Mas(x, y, data);
             }
         }
     }

@@ -1,9 +1,9 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const lines = fs.readFileSync(name).toString().trim().split('\n'); 
     const data = lines.map((l) => l.split(''));
-    return data 
+    return data;
 }
 
 function printG(grid) {
@@ -37,7 +37,7 @@ function isOOB(x, y, grid) {
 function computeAntiNodeOffset(a, b) {
     const [aX, aY] = a;
     const [bX, bY] = b;
-    return [aX - bX, aY - bY]
+    return [aX - bX, aY - bY];
 }
 
 function computeAntiNode(a, b) {
@@ -49,7 +49,7 @@ function computeAntiNode(a, b) {
 function computeAntiNodePair(a, b) {
     return [
         computeAntiNode(a, b),
-        computeAntiNode(b, a)
+        computeAntiNode(b, a),
     ]; 
 }
 
@@ -121,11 +121,13 @@ class UniqNodes {
 
 function main(name) {
     
+    // Calculate the impact of the signal. How many unique locations within the 
+    // bounds of the map contain an antinode?
     const one = () => {
-        const grid = loadInput(name)
-        printG(grid)
+        const grid = loadInput(name);
+        printG(grid);
         const nodeGroups = {};
-        iterCoords(grid, (x, y, grid) => collectMatchingNodes(x, y, grid, nodeGroups))
+        iterCoords(grid, (x, y, grid) => collectMatchingNodes(x, y, grid, nodeGroups));
         const uniqNodes = new UniqNodes();
         for (const nodes of Object.values(nodeGroups)) {
             for (let a = 0; a < nodes.length; a++) {
@@ -143,10 +145,12 @@ function main(name) {
     }
     one(); // 359
     
+    // Calculate the impact of the signal using this updated model. How many unique locations within 
+    // the bounds of the map contain an antinode?
     const two = () => {
-        const grid = loadInput(name)
+        const grid = loadInput(name);
         const nodeGroups = {};
-        iterCoords(grid, (x, y, grid) => collectMatchingNodes(x, y, grid, nodeGroups))
+        iterCoords(grid, (x, y, grid) => collectMatchingNodes(x, y, grid, nodeGroups));
         const uniqNodes = new UniqNodes();
         for (const nodes of Object.values(nodeGroups)) {
             for (let a = 0; a < nodes.length; a++) {
@@ -168,4 +172,4 @@ function main(name) {
 
 }
 
-main(process.argv[2])
+main(process.argv[2]);

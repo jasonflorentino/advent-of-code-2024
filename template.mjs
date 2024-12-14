@@ -2,13 +2,13 @@ import fs from 'node:fs'
 
 function loadInput(name) {
     const lines = fs.readFileSync(name).toString().trim().split('\n'); 
-    const data = lines
-    return data 
+    const data = lines;
+    return data;
 }
 
 function main(name) {
-    const data = loadInput(name)
-    console.log(data)
+    const data = loadInput(name);
+    console.log(data);
 }
 
-main(process.argv[2])
+main(process.argv[2]);

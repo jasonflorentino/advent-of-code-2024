@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const lines = fs.readFileSync(name)
@@ -25,7 +25,7 @@ function isUpdateOrdered(update, rules) {
             }
         }
     }
-    return true
+    return true;
 }
 
 function pagesAreOrdered(a, b, rules) {
@@ -39,10 +39,10 @@ function sumMiddlePageNums(total, update) {
 }
 
 function sortUpdate(update, rules) {
-    const relevant = rules.filter((r) => r.every((p) => update.includes(p)))
+    const relevant = rules.filter((r) => r.every((p) => update.includes(p)));
     const sorted = [];
     while (sorted.length !== update.length) {
-        sorted.push(findMin(sorted, update, relevant))
+        sorted.push(findMin(sorted, update, relevant));
     }
     return sorted;
 }
@@ -50,7 +50,7 @@ function sortUpdate(update, rules) {
 function findMin(sorted, update, rules) {
     const min = update.find((p) => {
         const relevant = rules.filter((r) => {
-            return !r.some((n) => sorted.includes(n)) && r.includes(p)
+            return !r.some((n) => sorted.includes(n)) && r.includes(p);
         })
         return relevant.length && relevant.every((r) => r[0] === p);
     })
@@ -59,11 +59,12 @@ function findMin(sorted, update, rules) {
 
 
 function main(name) {
-    const { rules, updates } = loadInput(name)
+    const { rules, updates } = loadInput(name);
     
     // one
     // Determine which updates are already in the correct order. What do you get if you add up the
     // middle page number from those correctly-ordered updates?
+    // 2583
     const ordered = updates.filter((u) => isUpdateOrdered(u, rules));
     const total1 = ordered.reduce(sumMiddlePageNums, 0);
     console.log(total1); 
@@ -71,9 +72,10 @@ function main(name) {
     // two
     // Find the updates which are not in the correct order. What do you get if you add up the middle
     // page numbers after correctly ordering just those updates?
+    // 1978
     const unordered = updates.filter((u) => !isUpdateOrdered(u, rules));
     const total2 = unordered.map((u) => sortUpdate(u, rules)).reduce(sumMiddlePageNums, 0);
-    console.log(total2)
+    console.log(total2);
 }
 
-main(process.argv[2])
+main(process.argv[2]);

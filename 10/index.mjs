@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 function loadInput(name) {
     const lines = fs.readFileSync(name).toString().trim().split('\n'); 
@@ -158,7 +158,9 @@ function main(name) {
         }
     }
 
+    // What is the sum of the scores of all trailheads on your topographic map?
     console.log(trails.totalScore1()); // 427
+    // What is the sum of the ratings of all trailheads?
     console.log(trails.totalScore2()); // 969
 }
 

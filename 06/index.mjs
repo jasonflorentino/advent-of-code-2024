@@ -1,4 +1,4 @@
-import fs from 'node:fs'
+import fs from 'node:fs';
 
 const Mark = {
     WALL: '#',
@@ -18,7 +18,7 @@ const Step = {
     N: [0, -1],
     S: [0, 1],
     W: [-1, 0],
-    E: [1, 0]
+    E: [1, 0],
 }
 
 function concat(...args) {
@@ -49,7 +49,7 @@ function nextDidx(dIdx) {
 }
 
 function nextDir(d) {
-    return toDir(nextDidx(toDidx(d)))
+    return toDir(nextDidx(toDidx(d)));
 }
 
 class Guard {
@@ -132,12 +132,14 @@ class Grid {
 function loadInput(name) {
     const rows = fs.readFileSync(name).toString().trim().split('\n'); 
     const grid = rows.map((r) => r.split('')); 
-    return grid 
+    return grid;
 }
 
 function main(name) {
     let uniqPositions;
     
+    // Predict the path of the guard. How many distinct positions will the guard visit before 
+    // leaving the mapped area?
     const one = () => {
         const grid = new Grid(loadInput(name));
         const [gX, gY] = grid.getGuardStart();    
@@ -150,6 +152,8 @@ function main(name) {
     }
     one(); //5129
     
+    // You need to get the guard stuck in a loop by adding a single new obstruction. How many 
+    // different positions could you choose for this obstruction?
     const two = () => {
         const possibleObs = [];
         for (let i = 0; i < uniqPositions.length; i++) {
