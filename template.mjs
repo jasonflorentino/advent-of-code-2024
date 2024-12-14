@@ -8,7 +8,7 @@ function loadInput(name) {
 
 function main(name) {
     const data = loadInput(name)
-    console.log(data.length)
+    console.log(data)
 }
 
 main(process.argv[2])
