@@ -157,7 +157,7 @@ function main(name) {
         let i = 0;
         const MAX = 7000;
         const MIN = 6000; // update this as we go to save time 
-        const THRES_N = 6; // probably a meaningly number of neighbours
+        const THRES_N = 6; // probably a meaningful number of neighbours
         const THRES_C = 16; // probably an interesting number of clustered bots
         while (++i < MAX) {
             for (const r of robots) r.p = move(r.p, r.v);
